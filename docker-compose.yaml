@@ -31,6 +31,8 @@ services:
       - ./web/static:/app/static
       - /etc/letsencrypt:/etc/letsencrypt    # Монтирование Let's Encrypt
     restart: always
+    networks:
+      - nginx_network
 
 volumes:
   static-data:
