@@ -23,10 +23,11 @@ jobs:
       run: |
         ssh root@77.239.96.124 << 'EOF'
           set -e
-          cd ~
-          rm -rf keramicheskiy.ru/
-          git clone https://github.com/keramicheskiy/keramicheskiy.ru.git
-          cd keramicheskiy.ru/
+#          cd ~
+#          rm -rf keramicheskiy.ru/
+#          git clone https://github.com/keramicheskiy/keramicheskiy.ru.git
+          cd ~/keramicheskiy.ru/
+          git pull origin main
           docker-compose down
           docker-compose up --build -d
         EOF
