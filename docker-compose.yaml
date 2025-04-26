@@ -28,7 +28,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./web/static:/app/static
+      - static-data:/web/static
       - /etc/letsencrypt:/etc/letsencrypt    # Монтирование Let's Encrypt
     restart: always
     networks:
