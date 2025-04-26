@@ -1,6 +1,7 @@
 
 div {
     background: linear-gradient(135deg, #00219f, #cf90f8, #ff719a);
+    animation: gradient 15s ease infinite;
 }
 
 html, body {
