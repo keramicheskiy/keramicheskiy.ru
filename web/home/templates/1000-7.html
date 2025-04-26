@@ -1,24 +1,28 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>1000-7</title>
+
+{% block title %}Я ДЕДИНСАЙТ{% endblock %}
+
+{% block meta %}
     <link rel="stylesheet" href="{% static 'home/style.css' %}">
-</head>
-<body>
+{% endblock %}
 
-<div id="count">1000</div>
-<button onclick="increment()">Сломать палец</button>
 
-<script>
-    let count = 1000;
+{% block content %}
+    <main>
+        <div id="count">1000</div>
+        <button onclick="increment()">Сломать палец</button>
+    
+        <script>
+            let count = 1000;
 
-    function increment() {
-        count -= 7;
-        document.getElementById('count').textContent = count;
-    }
-</script>
+            function increment() {
+                count -= 7;
+                document.getElementById('count').textContent = count;
+            }
+        </script>
+    </main>
 
-</body>
-</html>
+
+
+{% endblock %}
