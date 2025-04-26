@@ -8,7 +8,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN chmod +x entrypoint.sh
+RUN python manage.py collectstatic --noinput
 
-CMD ["./entrypoint.sh"]
+CMD ["gunicorn", "web.wsgi:application", "--bind", "0.0.0.0:8000"]
+
 
