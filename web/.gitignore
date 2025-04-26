@@ -1,0 +1,5 @@
+.env.local
+.env.prod
+.gitignore
+.dockerignore
+db.sqlite3

@@ -1,0 +1,5 @@
+django
+gunicorn
+djangorestframework
+requests
+dotenv
