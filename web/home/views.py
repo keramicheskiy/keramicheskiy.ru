@@ -10,8 +10,8 @@ import logging
 
 # Create your views here.
 @api_view(["GET"])
-def home(request):
-    return render(request, "home.html")
+def dead_inside(request):
+    return render(request, "1000-7.html")
 
 
 @api_view(["POST", "GET"])

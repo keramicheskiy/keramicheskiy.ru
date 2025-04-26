@@ -21,7 +21,7 @@ from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
+    path('1000-7', views.dead_inside),
     path('ping', views.ping),
     path('message', views.messager),
 ]
