@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from authentication.models import CustomUser
 from authentication.serializers import UserSerializer, CreateUserSerializer
 from .authentication import CookieTokenAuthentication
-from .tasks import send_verification_email
+from .tasks import send_verification_email, a
 
 
 # Create your views here.
@@ -32,6 +32,7 @@ def register(request):
             token = Token.objects.create(user=user)
 
             # send_verification_email.delay(user.email, random.randint(0, 9999))
+            a.delay()
 
             return Response({'token': token.key, 'user': UserSerializer(user).data})
         return Response(serializer.errors, status=status.HTTP_200_OK)

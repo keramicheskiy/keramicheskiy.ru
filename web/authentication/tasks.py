@@ -1,6 +1,8 @@
 import smtplib
+from datetime import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from time import sleep
 
 from celery import shared_task
 
@@ -28,3 +30,9 @@ def send_verification_email(receiver_email, code):
     except Exception as e:
         print(f"Ошибка отправки: {e}")
         return False
+
+
+@shared_task
+def a():
+    sleep(10)
+    return None

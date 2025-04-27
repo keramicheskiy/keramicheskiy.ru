@@ -3,8 +3,9 @@ services:
   web:
     build: ./web
     container_name: web
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
+
     volumes:
       - static-data:/web/static
     networks:
@@ -34,6 +35,8 @@ services:
       - redis
     environment:
       - ENVIRONMENT_FILE=.env.prod
+
+
 #  nginx:
 #    image: nginx:latest
 #    container_name: nginx
