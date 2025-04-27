@@ -21,6 +21,19 @@ services:
     expose:
       - "6379"
 
+
+  celery:
+    build: ./web  # тут важно: celery использует тот же код, что и web
+    container_name: celery
+    command: celery -A web worker --loglevel=info
+    volumes:
+      - static-data:/web/static
+    networks:
+      - nginx_network
+    depends_on:
+      - redis
+    environment:
+      - ENVIRONMENT_FILE=.env.prod
 #  nginx:
 #    image: nginx:latest
 #    container_name: nginx
