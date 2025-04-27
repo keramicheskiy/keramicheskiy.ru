@@ -31,7 +31,7 @@ def register(request):
             user.save()
             token = Token.objects.create(user=user)
 
-            send_verification_email(user.email, random.randint(0, 9999))
+            send_verification_email.delay(user.email, random.randint(0, 9999))
 
             return Response({'token': token.key, 'user': UserSerializer(user).data})
         return Response(serializer.errors, status=status.HTTP_200_OK)
