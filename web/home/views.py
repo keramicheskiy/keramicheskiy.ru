@@ -39,3 +39,11 @@ def messager(request):
 @api_view(["GET"])
 def ping(request):
     return HttpResponse("pong")
+
+
+@api_view(["GET"])
+def home(request):
+
+
+
+    return render(request, "authentication/registration.html")

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Я ДЕДИНСАЙТ{% endblock %}
+{% block title %}Я ДЕД IN SITE{% endblock %}
 
 {% block meta %}
     <link rel="stylesheet" href="{% static 'home/style.css' %}">
@@ -9,19 +9,17 @@
 
 
 {% block content %}
-    <main>
-        <div id="count">1000</div>
-        <button onclick="increment()">Сломать палец</button>
-    
-        <script>
-            let count = 1000;
+    <div id="count">1000</div>
+    <button onclick="increment()">Сломать палец</button>
 
-            function increment() {
-                count -= 7;
-                document.getElementById('count').textContent = count;
-            }
-        </script>
-    </main>
+    <script>
+        let count = 1000;
+
+        function increment() {
+            count -= 7;
+            document.getElementById('count').textContent = count;
+        }
+    </script>
 
 
 

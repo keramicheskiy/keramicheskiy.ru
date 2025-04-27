@@ -3,3 +3,5 @@ gunicorn
 djangorestframework
 requests
 dotenv
+celery==5.2.7
+redis==4.4.0
