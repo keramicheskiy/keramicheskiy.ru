@@ -1,5 +1,9 @@
-web/.venv
 .venv
 .idea
-web/.env.local
-web/.env.prod
+.gitignore
+.dockerignore
+/web/.dockerignore
+/web/db.sqlite3
+#/web/.env.prod
+/web/.env.local
+/nginx

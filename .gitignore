@@ -2,3 +2,8 @@
 .idea
 .gitignore
 .dockerignore
+/web/.dockerignore
+/web/db.sqlite3
+#/web/.env.prod
+/web/.env.local
+/nginx

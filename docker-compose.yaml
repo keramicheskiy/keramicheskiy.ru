@@ -12,7 +12,6 @@ services:
     environment:
       - ENVIRONMENT_FILE=.env.prod
     entrypoint: /entrypoint.sh
-    command: [ "gunicorn", "web.wsgi:application", "--bind", "0.0.0.0:8000" ]
 
 
 #  nginx:

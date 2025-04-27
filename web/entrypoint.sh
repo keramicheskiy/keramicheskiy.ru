@@ -3,8 +3,7 @@
 
 python manage.py collectstatic --noinput
 
-# Копируем новые статические файлы из /web/static в volume static-data
+# Копирование новых статические файлы из /web/static в volume static-data
 cp -r /web/static/* /static-data/
 
-# Теперь запускаем основной процесс (например, gunicorn)
-exec "$@"
+exec gunicorn web.wsgi:application --bind 0.0.0.0:8000
