@@ -14,6 +14,13 @@ services:
     entrypoint: /entrypoint.sh
 
 
+  redis:
+    image: redis:7-alpine
+    networks:
+      - nginx_network
+    expose:
+      - "6379"
+
 #  nginx:
 #    image: nginx:latest
 #    container_name: nginx

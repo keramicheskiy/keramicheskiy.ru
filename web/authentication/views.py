@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, get_object_or_404
 
 from rest_framework import status
@@ -10,6 +12,7 @@ from rest_framework.response import Response
 from authentication.models import CustomUser
 from authentication.serializers import UserSerializer, CreateUserSerializer
 from .authentication import CookieTokenAuthentication
+from .tasks import send_verification_email
 
 
 # Create your views here.
@@ -27,6 +30,9 @@ def register(request):
             user.set_password(request.data['password'])
             user.save()
             token = Token.objects.create(user=user)
+
+            send_verification_email(user.email, random.randint(0, 9999))
+
             return Response({'token': token.key, 'user': UserSerializer(user).data})
         return Response(serializer.errors, status=status.HTTP_200_OK)
 
