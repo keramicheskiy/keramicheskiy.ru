@@ -28,7 +28,7 @@ services:
 
 volumes:
   static-data:
-#    external: true
+    external: true
 
 networks:
   nginx_network:
