@@ -11,8 +11,8 @@ services:
       - nginx_network
     environment:
       - ENVIRONMENT_FILE=.env.prod
-    entrypoint: /entrypoint.sh  # Указываем entrypoint для выполнения перезаписи файлов
-    command: [ "gunicorn", "web.wsgi:application", "--bind", "0.0.0.0:8000" ]  # Запускаем gunicorn
+    entrypoint: /entrypoint.sh
+    command: [ "gunicorn", "web.wsgi:application", "--bind", "0.0.0.0:8000" ]
 
 
 #  nginx:
