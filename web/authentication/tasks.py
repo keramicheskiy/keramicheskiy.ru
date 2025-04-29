@@ -35,4 +35,5 @@ def send_verification_email(receiver_email, code):
 @shared_task
 def a():
     sleep(10)
+    print("--------------------SMEGMA---------------------")
     return None

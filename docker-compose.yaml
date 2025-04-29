@@ -5,7 +5,6 @@ services:
     container_name: web
     ports:
       - "8000:8000"
-
     volumes:
       - static-data:/web/static
     networks:
@@ -17,6 +16,7 @@ services:
 
   redis:
     image: redis:7-alpine
+    container_name: redis
     networks:
       - nginx_network
     expose:
