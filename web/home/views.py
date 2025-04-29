@@ -1,3 +1,5 @@
+from random import randint
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import status
@@ -6,6 +8,7 @@ from rest_framework.response import Response
 
 from home import forms, services
 import logging
+from authentication.tasks import send_verification_email
 
 
 # Create your views here.
@@ -43,7 +46,6 @@ def ping(request):
 
 @api_view(["GET"])
 def home(request):
+    send_verification_email.delay('sweetie.77@mail.ru', str(randint(0, 9999)).zfill(4))
 
-
-
-    return render(request, "authentication/registration.html")
+    return Response('ok')

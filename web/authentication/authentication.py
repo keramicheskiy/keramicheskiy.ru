@@ -9,3 +9,4 @@ class CookieTokenAuthentication(TokenAuthentication):
             return None  # Нет токена в куках — значит, не аутентифицируем
 
         return self.authenticate_credentials(token)
+

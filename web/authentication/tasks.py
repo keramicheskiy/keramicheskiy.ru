@@ -31,9 +31,15 @@ def send_verification_email(receiver_email, code):
         print(f"Ошибка отправки: {e}")
         return False
 
-
-@shared_task
-def a():
-    sleep(10)
-    print("--------------------SMEGMA---------------------")
-    return None
+#
+# import logging
+#
+# logger = logging.getLogger(__name__)
+#
+# @shared_task(bind=True)
+# def my_task(self, arg1, arg2):
+#     try:
+#         # Код задачи
+#         return "Success"
+#     except Exception as e:
+#         self.retry(exc=e)

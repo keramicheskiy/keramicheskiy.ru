@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'authentication',
+    'celery'
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,9 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 # Celery и Redis
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_TASK_ALWAYS_EAGER = False  # Важно! Не запускать задачи синхронно
+CELERY_TASK_ACKS_LATE = True
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
 
 # Почта
 sender_email = os.environ.get('EMAIL')

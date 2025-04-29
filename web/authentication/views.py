@@ -1,3 +1,4 @@
+import logging
 import random
 
 from django.shortcuts import render, get_object_or_404
@@ -9,10 +10,10 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from authentication.models import CustomUser
+from authentication.models import CustomUser, VerifyCode
 from authentication.serializers import UserSerializer, CreateUserSerializer
 from .authentication import CookieTokenAuthentication
-from .tasks import send_verification_email, a
+from .services import verify_email
 
 
 # Create your views here.
@@ -24,6 +25,9 @@ def register(request):
         return Response({"fields": CreateUserSerializer.Meta.fields})
     elif request.method == 'POST':
         serializer = CreateUserSerializer(data=request.data)
+        print(request.data)
+        logger = logging.getLogger(__name__)
+        logger.info(request.data)
         if serializer.is_valid():
             serializer.save()
             user = CustomUser.objects.get(username=request.data['username'])
@@ -31,18 +35,20 @@ def register(request):
             user.save()
             token = Token.objects.create(user=user)
 
-            send_verification_email.delay(user.email, str(random.randint(0, 9999)).zfill(4) )
-            # a.delay()
+            try:
+                verify_email(user)
+            except Exception as e:
+                print("Ошибка посылки письма")
 
-            return Response({'token': token.key, 'user': UserSerializer(user).data})
+            return Response({'token': token.key, 'user': UserSerializer(user).data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_200_OK)
 
 
 """
 {
-"username": "krmch",
-"email": "sweetie.77@mail.ru",
-"password": "Sagay228"
+"username": "keramicheskiy",
+"email": "info@keramicheskiy.com",
+"password": "nigga"
 }
 """
 
@@ -70,4 +76,5 @@ def login(request):
 @authentication_classes([CookieTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def test_token(request):
-    return Response(f"passed for {request.user.username}, token: {request.COOKIES.get('Token')}", status=status.HTTP_200_OK)
+    return Response(f"passed for {request.user.username}, token: {request.COOKIES.get('Token')}",
+                    status=status.HTTP_200_OK)
