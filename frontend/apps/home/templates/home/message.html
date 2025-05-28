@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="POST">
+    {% for field in form %}
+        <div class="form-style {% if field.errors %} errors {% endif %}">
+            {{ field.label_tag }}
+            {{ field.errors }}
+            {{ field }}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Отправить</button>
+</form>
+
+<br>
+<hr>
+
+<button id="demo" onclick="myFunction()">Click me.</button>
+
+<script>
+    function myFunction() {
+        document.getElementById("demo").style.color = "red";
+        fetch("http://localhost:8080/ping")
+            .then(response => response.json())
+            .then(data => {
+                console.log("Данные с другого контейнера:", data);
+            })
+            .catch(error => console.error("Ошибка запроса:", error));
+
+
+    }
+</script>
+
+</body>
+</html>

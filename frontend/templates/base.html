@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ДЕБИЛ ЗАБЫЛ НАПИСАТЬ TITLE{% endblock %}</title>
+    {% block meta %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <h1>РИСУРС</h1>
+    <nav>
+        <h1 id="authenticated" href="/auth/login">Вы не представились системе</h1>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // 👉 Название куки, в которой хранится токен
+    const getCookie = (name) => {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+    };
+
+    const token = getCookie('auth_token'); // Назови правильно под себя
+
+    if (!token) return; // Нет токена — ничего не делаем
+
+    fetch('http://localhost:8080/auth/check-token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + token  // или Bearer, зависит от твоего бэкенда
+        },
+    })
+    .then(response => {
+        if (response.status === 400) {
+            console.log('Неавторизован');
+            return;
+        }
+        if (!response.ok) {
+            throw new Error('Ошибка сети');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.username) {
+            const authenticated = document.getElementById('authenticated');
+            if (authenticated) {
+                authenticated.textContent = data.username;
+                authenticated.href = '/profile';  // или другой адрес
+            }
+        }
+    })
+    .catch(error => console.error('Ошибка:', error));
+});
+</script>
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+
+<footer>
+    <p>&copy; 2025 keramicheskiy. Все права не защищены.</p>
+    <p>Email: <a href="mailto:feedback@keramicheskiy.com">feedback@keramicheskiy.com</a></p>
+    <p><a href="/about">О сайте</a> |
+        <a href="/contact">Связаться со мной</a>
+    </p>
+</footer>
+
+</body>
+</html>
