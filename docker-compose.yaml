@@ -24,7 +24,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - static-data/keramicheskiy-frontend/:/frontend/static
+      - static-data:/frontend/static
     networks:
       - nginx_network
     environment:
