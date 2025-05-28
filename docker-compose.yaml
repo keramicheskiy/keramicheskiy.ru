@@ -10,7 +10,6 @@ services:
       - nginx_network
     environment:
       - ENVIRONMENT_FILE=.env.local
-      - CELERY_BROKER_URL=redis://redis:6379/0
     depends_on:
       - redis
 #    entrypoint: /entrypoint.sh
